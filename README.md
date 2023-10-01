@@ -9,28 +9,33 @@
 
 ## Game Design
 
--   Camera Orientation: _How are the art assets viewed from? (ie. topdown or side)_
--   Camera Movement: _How does the camera move in your game? (if at all)_
--   Player Health: _How are you handling player health? (healthbar, lives, ?)_
--   End Condition: _How does a game/round/level end?_
--   Scoring: _How does the player earn points in your game?_
+-   Camera Orientation: Topdown
+-   Camera Movement: Fixed
+-   Player Health: You have a set amount of times you can get hit before you die.
+-   End Condition: By killing all the enemies on the screen.
+-   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without 
 
 ### Game Description
 
-_A brief explanation of your game. Inculde what is the objective for the player. Think about what would go on the back of a game box._
+
 
 ### Controls
 
 -   Movement
-    -   Up: 
-    -   Down: 
-    -   Left: 
-    -   Right: 
--   Fire: 
+    -   Up: w
+    -   Down: s
+    -   Left: a
+    -   Right: d
+-   Fire: left click
+-   Parry: right click
+-   Dash: space
+-   Aim: Mouse
 
 ## You Additions
 
-_List out what you added to your game to make it different for you_
+- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through
+- Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles \
+- Ability to aim omni directionally
 
 ## Sources
 
