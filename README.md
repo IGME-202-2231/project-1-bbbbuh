@@ -33,9 +33,9 @@
 
 ## You Additions
 
-- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through
-- Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles \
-- Ability to aim omni directionally
+- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through.
+- Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles.
+- Ability to aim omni directionally.
 
 ## Sources
 
