@@ -13,7 +13,7 @@
 -   Camera Movement: Fixed
 -   Player Health: You have a set amount of times you can get hit before you die.
 -   End Condition: By killing all the enemies on the screen.
--   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without 
+-   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without getting hit, etc.
 
 ### Game Description
 
