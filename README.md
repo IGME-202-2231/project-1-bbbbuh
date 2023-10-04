@@ -13,7 +13,7 @@
 -   Camera Movement: Fixed
 -   Player Health: You have a set amount of times you can get hit before you die.
 -   End Condition: By killing all the enemies on the screen.
--   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without 
+-   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without getting hit, etc.
 
 ### Game Description
 
@@ -33,9 +33,9 @@
 
 ## You Additions
 
-- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through
-- Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles \
-- Ability to aim omni directionally
+- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through.
+- Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles.
+- Ability to aim omni directionally.
 
 ## Sources
 
