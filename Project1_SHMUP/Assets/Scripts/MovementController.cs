@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
     //fields
     Vector3 objectPosition = Vector3.zero;
+    
     [SerializeField]
     float speed = 1.0f;
     Vector3 direction = Vector3.zero;
