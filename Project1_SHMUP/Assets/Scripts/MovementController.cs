@@ -17,6 +17,15 @@ public class MovementController : MonoBehaviour
     float camHeight;
     float camWidth;
 
+    //shooting
+    Vector3 mousePos;
+    [SerializeField]
+    GameObject bullet;
+    bool canFire = true;
+    float timer = 0f;
+    [SerializeField]
+    float timeBetweenFire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +37,10 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //movement
         velocity = direction * speed * Time.deltaTime;
         objectPosition += velocity;
         
-        //leave space for movement validation
         if (objectPosition.y >= camHeight/2) 
         {
             objectPosition.y = -1 * camHeight/2;
@@ -52,6 +61,34 @@ public class MovementController : MonoBehaviour
 
 
         transform.position = objectPosition;
+
+        //mouse controls
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 rotation = mousePos - transform.position;
+
+        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg - 90;
+
+        transform.rotation = Quaternion.Euler(0,0,rotZ);
+
+
+        //shooting
+        if (!canFire)
+        {
+            timer += Time.deltaTime;
+            if (timer > timeBetweenFire)
+            {
+                canFire = true;
+                timer = 0;
+            }
+        }
+
+        if (Input.GetMouseButton(0) && canFire) 
+        {
+            canFire = false;
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
+
     }
 
     public void SetDirection(Vector3 newDirection)
@@ -59,7 +96,7 @@ public class MovementController : MonoBehaviour
         direction = newDirection.normalized;
         if (newDirection != Vector3.zero) 
         {
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         }
         
     }
