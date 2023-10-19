@@ -32,6 +32,8 @@ public class BulletScript : MonoBehaviour
     {
         velocity = direction * bulletSpeed * Time.deltaTime;
         transform.position += velocity;
+
+        //put in collision manager
         if (Mathf.Abs(transform.position.y) > camHeight/2 || Mathf.Abs(transform.position.x) > camWidth/2) 
         {
             Destroy(gameObject);
