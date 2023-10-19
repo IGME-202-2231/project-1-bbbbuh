@@ -2,8 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    //singleton
+    public static PlayerController Instance {get; private set;}
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+        
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
+
+
     //fields
     Vector3 objectPosition = Vector3.zero;
     
@@ -17,14 +34,7 @@ public class MovementController : MonoBehaviour
     float camHeight;
     float camWidth;
 
-    //shooting
     Vector3 mousePos;
-    [SerializeField]
-    GameObject bullet;
-    bool canFire = true;
-    float timer = 0f;
-    [SerializeField]
-    float timeBetweenFire;
 
     // Start is called before the first frame update
     void Start()
@@ -71,23 +81,6 @@ public class MovementController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0,0,rotZ);
 
-
-        //shooting
-        if (!canFire)
-        {
-            timer += Time.deltaTime;
-            if (timer > timeBetweenFire)
-            {
-                canFire = true;
-                timer = 0;
-            }
-        }
-
-        if (Input.GetMouseButton(0) && canFire) 
-        {
-            canFire = false;
-            Instantiate(bullet, transform.position, transform.rotation);
-        }
 
     }
 

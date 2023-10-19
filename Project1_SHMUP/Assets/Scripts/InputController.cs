@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     [SerializeField]
-    MovementController movementController;
+    PlayerController playerController;
 
     public void OnMove(InputAction.CallbackContext context) 
     {
-        movementController.SetDirection(context.ReadValue<Vector2>());
+        playerController.SetDirection(context.ReadValue<Vector2>());
     }
 }

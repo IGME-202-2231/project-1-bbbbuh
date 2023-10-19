@@ -207,19 +207,76 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &976934651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976934653}
+  - component: {fileID: 976934652}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &976934652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976934651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f964f8a0faa0d6b45b00510d04fb5a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1384749331947429995, guid: aaee8eabc50f5884eb913f3d8110f7e5, type: 3}
+  timeBetweenFire: 0.3
+--- !u!4 &976934653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976934651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.34, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441634406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2627013467920564183, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
   m_PrefabInstance: {fileID: 7324006561816271491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1441634408 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5371722577148842474, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
+  m_PrefabInstance: {fileID: 7324006561816271491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441634406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db569490197a964ca89d65c25902403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4376119313302534575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,6 +289,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1441634406}
+    - target: {fileID: 7350836900619383960, guid: 250ea6ff6e29fd34e8dc5e4bdf84fae5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7350836900619383960, guid: 250ea6ff6e29fd34e8dc5e4bdf84fae5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.34
@@ -293,10 +354,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4119303778441321773, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1441634408}
     - target: {fileID: 5371722577148842474, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 6537626172425334219, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6537626172425334219, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -342,10 +411,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccbc8489537eba748b7a73acb2005d6d, type: 3}
---- !u!1660057539 &9223372036854775807
-SceneRoots:
-  m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 519420032}
-  - {fileID: 7324006561816271491}
-  - {fileID: 4376119313302534575}

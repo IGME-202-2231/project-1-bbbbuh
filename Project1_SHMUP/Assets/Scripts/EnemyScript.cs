@@ -8,10 +8,6 @@ public class EnemyScript : MonoBehaviour
     GameObject player;
     [SerializeField]
     float speed;
-    [SerializeField]
-    SpriteInfo bullet;
-    [SerializeField]
-    SpriteInfo self;
     
 
 
@@ -33,18 +29,7 @@ public class EnemyScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
 
-        if (AABBCheck(bullet, self)) 
-        {
-            Destroy(gameObject);
-        }
 
     }
     
-    bool AABBCheck(SpriteInfo spriteA, SpriteInfo spriteB)
-    {
-        return spriteB.RectMin.x < spriteA.RectMax.x &&
-           spriteB.RectMax.x > spriteA.RectMin.x &&
-           spriteB.RectMax.y > spriteA.RectMin.y &&
-           spriteB.RectMin.y < spriteA.RectMax.y;
-    }
 }
