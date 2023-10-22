@@ -39,10 +39,6 @@ public class PlayerController : MonoBehaviour
     //mouse
     Vector3 mousePos;
 
-    //stats
-    int health;
-
-    public int Health {get {return health;} set{health = value;}}
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +46,6 @@ public class PlayerController : MonoBehaviour
         objectPosition = transform.position;
         camHeight = 2f * cam.orthographicSize;
         camWidth = camHeight * cam.aspect;
-        health = 10;
     }
 
     // Update is called once per frame
@@ -90,7 +85,11 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0,0,rotZ);
 
-
+        //deathlogic
+        if (gameObject.GetComponent<ObjectInfo>().Health <=0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetDirection(Vector3 newDirection)

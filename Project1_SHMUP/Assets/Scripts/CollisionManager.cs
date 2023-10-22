@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollsionManager : MonoBehaviour
+public class CollisionManager : MonoBehaviour
 {
     //singleton
-    public static CollsionManager Instance {get; private set;}
+    public static CollisionManager Instance {get; private set;}
     private void Awake() 
     { 
         // If there is an instance, and it's not me, delete myself.
@@ -23,12 +23,13 @@ public class CollsionManager : MonoBehaviour
     // game objects
     GameObject player;
 
-
     [SerializeField]
+    EnemyManager enemyManager;
     List<GameObject> enemies;
+    List<GameObject> enemyBullets;
 
     [SerializeField]
-    BulletManager bm;
+    BulletManager bulletManager;
     List<GameObject> playerBullets;
 
     //camera
@@ -37,11 +38,16 @@ public class CollsionManager : MonoBehaviour
     float camHeight;
     float camWidth;
 
+    public float CamHeight { get { return camHeight; }}
+    public float CamWidth { get {  return camWidth; }}
+
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerController.Instance.transform.gameObject;
-        playerBullets = bm.BulletList;
+        playerBullets = bulletManager.BulletList;
+        enemies = enemyManager.EnemyList;
+        enemyBullets = enemyManager.EnemyBulletList;
         camHeight = 2f * cam.orthographicSize;
         camWidth = camHeight * cam.aspect;
 
@@ -52,26 +58,22 @@ public class CollsionManager : MonoBehaviour
     {
 
         //enemy && bullet collision
-        for (int i = 0; i < enemies.Count; i++) 
+        for (int i = enemies.Count - 1; i >= 0; i--) 
         {
             //playercollision
-            if (AABBCheck(player, enemies[i])) {
+            if (CircleCollision(player, enemies[i])) {
                 Destroy(enemies[i]);
                 enemies.RemoveAt(i);
-
-                PlayerController.Instance.Health--;
-                if (PlayerController.Instance.Health <= 0) {
-                    Destroy(player);
-                }
+                PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
             }
 
-            for (int j = 0; j < playerBullets.Count; j++) 
+            for (int j = playerBullets.Count - 1; j >= 0; j--)
             {
-                if (AABBCheck(enemies[i],playerBullets[j])) 
+                if (CircleCollision(enemies[i],playerBullets[j])) 
                 {
-                    enemies[i].GetComponent<EnemyHealth>().Health--;
+                    enemies[i].GetComponent<ObjectInfo>().Health--;
 
-                    if (enemies[i].GetComponent<EnemyHealth>().Health <= 0) 
+                    if (enemies[i].GetComponent<ObjectInfo>().Health <= 0) 
                     {
                         Destroy(enemies[i]);
                         enemies.RemoveAt(i);
@@ -80,37 +82,42 @@ public class CollsionManager : MonoBehaviour
 
                     Destroy(playerBullets[j]);
                     playerBullets.RemoveAt(j);
-                
-                    i--;
-                    j--;
+                    
                 }
             }
         }
 
         //delete offscreen bullets
-        for (int j = 0; j < playerBullets.Count; j++) 
+        for (int j = playerBullets.Count - 1; j >= 0; j--) 
         {
             if (Mathf.Abs(playerBullets[j].transform.position.y) > camHeight/2 || Mathf.Abs(playerBullets[j].transform.position.x) > camWidth/2) 
             {
-                GameObject current = playerBullets[j];
+                Destroy(playerBullets[j]);
                 playerBullets.RemoveAt(j);
-                Destroy(current);
             }
         } 
-        
+
+        //enemy bullets
+        for (int i = enemyBullets.Count - 1; i >= 0; i--)
+        {
+            if (Mathf.Abs(enemyBullets[i].transform.position.y) > camHeight / 2 || Mathf.Abs(enemyBullets[i].transform.position.x) > camWidth / 2)
+            {
+                Destroy(enemyBullets[i]);
+                enemyBullets.RemoveAt(i);
+            }
+            else if (CircleCollision(player, enemyBullets[i]))
+            {
+                Destroy(enemyBullets[i]);
+                enemyBullets.RemoveAt(i);
+                PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
+            }
+        }
+
     }
 
-    bool AABBCheck(GameObject objA, GameObject objB)
+
+    bool CircleCollision(GameObject objA, GameObject objB)
     {
-        Renderer rendererA = objA.GetComponent<Renderer>();
-        Renderer rendererB = objB.GetComponent<Renderer>();
-
-        Bounds boundsA = rendererA.bounds;
-        Bounds boundsB = rendererB.bounds;
-
-        return boundsB.min.x < boundsA.max.x &&
-           boundsB.max.x > boundsA.min.x &&
-           boundsB.max.y > boundsA.min.y &&
-           boundsB.min.y < boundsA.max.y;
+        return (objA.GetComponent<ObjectInfo>().Radius + objB.GetComponent<ObjectInfo>().Radius) > (Mathf.Sqrt(Mathf.Pow(objB.transform.position.x - objA.transform.position.x, 2) + Mathf.Pow(objB.transform.position.y - objA.transform.position.y, 2)));
     }
 }

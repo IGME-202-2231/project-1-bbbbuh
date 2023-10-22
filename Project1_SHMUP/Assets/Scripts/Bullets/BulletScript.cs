@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    Vector3 objectPosition = Vector3.zero;
 
     [SerializeField]
     float bulletSpeed;

@@ -16,7 +16,12 @@ public class BulletManager : MonoBehaviour
     [SerializeField]
     List<GameObject> bulletList = new List<GameObject>();
 
-    
+    public List<GameObject> BulletList
+    {
+        get { return bulletList; }
+        set { bulletList = value; }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -45,10 +50,5 @@ public class BulletManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> BulletList 
-    {
-        get {return bulletList;} 
-        set {bulletList=value;}
-        
-    }
+    
 }

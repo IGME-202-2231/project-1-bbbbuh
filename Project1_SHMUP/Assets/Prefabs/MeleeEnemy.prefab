@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4990279930333970860}
   - component: {fileID: 5005515791520669980}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: MeleeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,3 +113,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
+  radius: 0.5
