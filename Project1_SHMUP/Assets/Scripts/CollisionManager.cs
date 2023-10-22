@@ -68,16 +68,16 @@ public class CollsionManager : MonoBehaviour
             for (int j = 0; j < playerBullets.Count; j++) 
             {
                 if (AABBCheck(enemies[i],playerBullets[j])) 
-                {   
-                    // enemies[i].Health--;
+                {
+                    enemies[i].GetComponent<EnemyHealth>().Health--;
 
-                    // if (enemies[i].Health <= 0) 
-                    // {
-                    //     Destroy(enemies[i]);
-                    //     enemies.RemoveAt(i);
-                    // }
-                    
-                    
+                    if (enemies[i].GetComponent<EnemyHealth>().Health <= 0) 
+                    {
+                        Destroy(enemies[i]);
+                        enemies.RemoveAt(i);
+                    }
+
+
                     Destroy(playerBullets[j]);
                     playerBullets.RemoveAt(j);
                 

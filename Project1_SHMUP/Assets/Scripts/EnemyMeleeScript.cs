@@ -4,31 +4,11 @@ using UnityEngine;
 
 public class EnemyMeleeScript : MonoBehaviour
 {
-    //singleton
-    public static EnemyMeleeScript Instance {get; private set;}
-    private void Awake() 
-    { 
-        // If there is an instance, and it's not me, delete myself.
-        
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
-    }
 
     [SerializeField]
     GameObject player;
     [SerializeField]
     float speed;
-    
-    [SerializeField]
-    int health;
-
-    public int Health { get {return health;} set{health = value;}}
 
     float distance;
     // Start is called before the first frame update
