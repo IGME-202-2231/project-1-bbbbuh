@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
 
     //fields
+    //movement
     Vector3 objectPosition = Vector3.zero;
     
     [SerializeField]
@@ -29,12 +30,19 @@ public class PlayerController : MonoBehaviour
     Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
+    //camera
     [SerializeField]
     Camera cam;
     float camHeight;
     float camWidth;
 
+    //mouse
     Vector3 mousePos;
+
+    //stats
+    int health;
+
+    public int Health {get {return health;} set{health = value;}}
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +50,7 @@ public class PlayerController : MonoBehaviour
         objectPosition = transform.position;
         camHeight = 2f * cam.orthographicSize;
         camWidth = camHeight * cam.aspect;
+        health = 10;
     }
 
     // Update is called once per frame
@@ -86,16 +95,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetDirection(Vector3 newDirection)
     {
-        direction = newDirection.normalized;
-        if (newDirection != Vector3.zero) 
-        {
-            //transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
-        }
-        
+        direction = newDirection.normalized;      
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawLine(transform.position, transform.position + (direction * 2));
-    }
 }
 

@@ -13,7 +13,10 @@ public class BulletManager : MonoBehaviour
     [SerializeField]
     float timeBetweenFire;
 
+    [SerializeField]
     List<GameObject> bulletList = new List<GameObject>();
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +42,13 @@ public class BulletManager : MonoBehaviour
         {
             canFire = false;
             bulletList.Add(Instantiate(bullet, PlayerController.Instance.transform.position, PlayerController.Instance.transform.rotation));
-            foreach (GameObject obj in bulletList) {
-                Debug.Log("bullet");
-            }
         }
+    }
+
+    public List<GameObject> BulletList 
+    {
+        get {return bulletList;} 
+        set {bulletList=value;}
+        
     }
 }
