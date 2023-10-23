@@ -10,12 +10,37 @@ public class ObjectInfo : MonoBehaviour
     [SerializeField]
     float radius;
 
+    float timer = 0;
+    bool hurtAnim = false;
+
     public int Health { get { return health; } set { health = value; } }
 
     public float Radius { get { return radius; } set { radius = value; } }
 
+    void Update()
+    {
+        if (hurtAnim) 
+        {
+            timer += Time.deltaTime;
+            if (timer > 0.5f)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                hurtAnim = false;
+                timer = 0;
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    
+
+    public void Hurt()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        hurtAnim = true;
     }
 }

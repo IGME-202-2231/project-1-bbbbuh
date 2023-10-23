@@ -13,7 +13,6 @@ public class EnemyBulletScript : MonoBehaviour
     {
         direction = new Vector3(Mathf.Cos((transform.rotation.eulerAngles.z - 90) * Mathf.Deg2Rad), Mathf.Sin((transform.rotation.eulerAngles.z - 90) * Mathf.Deg2Rad), 0);
         direction.Normalize();
-        Debug.Log(transform.rotation.eulerAngles.z);
     }
 
     // Update is called once per frame

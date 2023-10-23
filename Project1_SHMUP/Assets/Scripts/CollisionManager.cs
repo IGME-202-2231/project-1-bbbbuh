@@ -64,7 +64,10 @@ public class CollisionManager : MonoBehaviour
             if (CircleCollision(player, enemies[i])) {
                 Destroy(enemies[i]);
                 enemies.RemoveAt(i);
+
                 PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
+                PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
+                HealthScript.Instance.UpdateHealth(1);
             }
 
             for (int j = playerBullets.Count - 1; j >= 0; j--)
@@ -72,11 +75,14 @@ public class CollisionManager : MonoBehaviour
                 if (CircleCollision(enemies[i],playerBullets[j])) 
                 {
                     enemies[i].GetComponent<ObjectInfo>().Health--;
+                    enemies[i].GetComponent<ObjectInfo>().Hurt();
+                    ScoreScript.Instance.UpdateScore(5);
 
                     if (enemies[i].GetComponent<ObjectInfo>().Health <= 0) 
                     {
                         Destroy(enemies[i]);
                         enemies.RemoveAt(i);
+                        ScoreScript.Instance.UpdateScore(5);
                     }
 
 
@@ -110,6 +116,8 @@ public class CollisionManager : MonoBehaviour
                 Destroy(enemyBullets[i]);
                 enemyBullets.RemoveAt(i);
                 PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
+                PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
+                HealthScript.Instance.UpdateHealth(1);
             }
         }
 
