@@ -17,6 +17,13 @@ public class ObjectInfo : MonoBehaviour
 
     public float Radius { get { return radius; } set { radius = value; } }
 
+    bool onCooldown = false;
+
+    private void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
     void Update()
     {
         if (hurtAnim) 
@@ -41,6 +48,7 @@ public class ObjectInfo : MonoBehaviour
     public void Hurt()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+
         hurtAnim = true;
     }
 }
