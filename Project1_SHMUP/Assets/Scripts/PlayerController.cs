@@ -50,6 +50,17 @@ public class PlayerController : MonoBehaviour
     float dashTimer;
     bool canDash = true;
 
+    //parry
+    [SerializeField]
+    GameObject parryPrefab;
+    [SerializeField]
+    float parryActiveTime;
+    [SerializeField]
+    float parryLockout;
+    float parryTimer;
+    bool canParry;
+    bool parryActive;
+
     //invincibility
     bool invincible;
 
@@ -120,6 +131,24 @@ public class PlayerController : MonoBehaviour
                 Vector3 dash = new Vector3(rotation.x, rotation.y, 0).normalized * dashDistance;
                 objectPosition += dash;
                 gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+            }
+
+            //parry
+            if (!canParry)
+            {
+                parryTimer += Time.deltaTime;
+                if (parryTimer > parryLockout)
+                {
+                    canParry = true;
+                    parryTimer = 0;
+                    control = true;
+                }
+            }
+
+            if (Input.GetMouseButton(1) && canParry)
+            {
+                canParry = false;
+                control = false;
             }
         }
 

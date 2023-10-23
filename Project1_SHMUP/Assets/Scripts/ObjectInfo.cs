@@ -17,8 +17,6 @@ public class ObjectInfo : MonoBehaviour
 
     public float Radius { get { return radius; } set { radius = value; } }
 
-    bool onCooldown = false;
-
     private void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
