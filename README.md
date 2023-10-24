@@ -13,11 +13,11 @@
 -   Camera Movement: Fixed
 -   Player Health: You have a set amount of times you can get hit before you die.
 -   End Condition: By killing all the enemies on the screen.
--   Scoring: Player earns points for completing certain actions such as killing with a dash, parrying, completing a level without getting hit, etc.
+-   Scoring: Player earns points for completing certain actions such hittin an enemy, killing an enemy, parrying a projectile, parrying a collision, etc.
 
 ### Game Description
 
-
+In this game your objective is to kill all the enemy ships on screen with the highest score possible. You have the ability to dash and parry to avoid enemy collision and projectiles, and you are able to aim and shoot with the mouse. 
 
 ### Controls
 
@@ -33,14 +33,13 @@
 
 ## You Additions
 
-- Dash mechanic that gives you a burst of invincible movement that damages enemies that you dash through.
+- Dash mechanic that gives you a burst of invincible movement to escape from tough situations.
 - Parry mechanic that puts up a shield around you for a short moment that will reflect projectiles.
-- Ability to aim omni directionally.
+- Ability to aim omni directionally via the mouse.
 
 ## Sources
 
--   _List all project sources here –models, textures, sound clips, assets, etc._
--   _If an asset is from the Unity store, include a link to the page and the author’s name_
+Assets by Kenny: https://opengameart.org/content/space-shooter-redux
 
 ## Known Issues
 
@@ -49,4 +48,6 @@ _List any errors, lack of error checking, or specific information that I need to
 ### Requirements not completed
 
 _If you did not complete a project requirement, notate that here_
+
+I don't think I am missing any requirements but the actual content of the game, and the graphics aren't as fleshed out as I wanted it to be.
 
