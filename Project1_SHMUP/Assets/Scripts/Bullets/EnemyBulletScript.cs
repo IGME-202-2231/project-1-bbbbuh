@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
 {
+    
+
     [SerializeField]
     float bulletSpeed;
     Vector3 velocity;

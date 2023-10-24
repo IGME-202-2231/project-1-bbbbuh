@@ -24,9 +24,15 @@ public class GameOverScript : MonoBehaviour
         
     }
 
-    public void GameOver()
+    public void GameOver(bool win)
     {
         finalScore.text = "Final Score: " + ScoreScript.Instance.Score;
+        if (win) 
+        {
+            gameOver.text = "You Win!";
+            gameOver.color = Color.green;
+            finalScore.color = Color.green;
+        }
         gameOver.gameObject.SetActive(true);
         finalScore.gameObject.SetActive(true);
         HealthScript.Instance.gameObject.SetActive(false);

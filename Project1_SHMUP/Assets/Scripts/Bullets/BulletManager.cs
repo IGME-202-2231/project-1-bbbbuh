@@ -43,7 +43,7 @@ public class BulletManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && canFire) 
+        if (Input.GetMouseButton(0) && canFire && PlayerController.Instance.Control) 
         {
             canFire = false;
             bulletList.Add(Instantiate(bullet, PlayerController.Instance.transform.position, PlayerController.Instance.transform.rotation));

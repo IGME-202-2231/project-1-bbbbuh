@@ -64,10 +64,18 @@ public class CollisionManager : MonoBehaviour
             if (CircleCollision(player, enemies[i])) {
                 Destroy(enemies[i]);
                 enemies.RemoveAt(i);
-
-                PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
-                PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
-                HealthScript.Instance.UpdateHealth(1);
+                
+                if (!PlayerController.Instance.ParryActive) 
+                {
+                    PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
+                    PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
+                    HealthScript.Instance.UpdateHealth(1);
+                }
+                else 
+                {
+                    ScoreScript.Instance.UpdateScore(10);
+                    PlayerController.Instance.ParryTimer = PlayerController.Instance.ParryLockout;
+                }
             }
 
             for (int j = playerBullets.Count - 1; j >= 0; j--)
@@ -76,13 +84,13 @@ public class CollisionManager : MonoBehaviour
                 {
                     enemies[i].GetComponent<ObjectInfo>().Health--;
                     enemies[i].GetComponent<ObjectInfo>().Hurt();
-                    ScoreScript.Instance.UpdateScore(5);
+                    ScoreScript.Instance.UpdateScore(1);
 
                     if (enemies[i].GetComponent<ObjectInfo>().Health <= 0) 
                     {
                         Destroy(enemies[i]);
                         enemies.RemoveAt(i);
-                        ScoreScript.Instance.UpdateScore(5);
+                        ScoreScript.Instance.UpdateScore(10);
                     }
 
 
@@ -113,12 +121,31 @@ public class CollisionManager : MonoBehaviour
             }
             else if (CircleCollision(player, enemyBullets[i]))
             {
-                Destroy(enemyBullets[i]);
-                enemyBullets.RemoveAt(i);
-                PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
-                PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
-                HealthScript.Instance.UpdateHealth(1);
+                if (PlayerController.Instance.ParryActive) 
+                {
+                    enemyBullets[i].GetComponent<SpriteRenderer>().color = Color.blue;
+                    playerBullets.Add(enemyBullets[i]);
+                    enemyBullets.RemoveAt(i);
+                    PlayerController.Instance.ParryTimer = PlayerController.Instance.ParryLockout;
+                    ScoreScript.Instance.UpdateScore(5);
+                }
+                else 
+                {
+                    Destroy(enemyBullets[i]);
+                    enemyBullets.RemoveAt(i);
+                    PlayerController.Instance.GetComponent<ObjectInfo>().Health--;
+                    PlayerController.Instance.GetComponent<ObjectInfo>().Hurt();
+                    HealthScript.Instance.UpdateHealth(1);
+                }
+                
             }
+        }
+
+        //win condition
+        if (enemies.Count <= 0) 
+        {
+            gameObject.GetComponent<GameOverScript>().GameOver(true);
+            Time.timeScale = 0;
         }
 
     }

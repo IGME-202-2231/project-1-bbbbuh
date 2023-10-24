@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     //stop movment
     bool control = true;
 
+    public bool Control {get {return control;}}
+
     //movement
     Vector3 objectPosition = Vector3.zero;
     
@@ -57,9 +59,13 @@ public class PlayerController : MonoBehaviour
     float parryActiveTime;
     [SerializeField]
     float parryLockout;
-    float parryTimer;
-    bool canParry;
-    bool parryActive;
+    float parryTimer = 0;
+    bool canParry = true;
+    bool parryActive = false;
+
+    public bool ParryActive{get{return parryActive;} set{parryActive = value;}}
+    public float ParryTimer{get{return parryTimer;} set{parryTimer = value;}}
+    public float ParryLockout{get{return parryLockout;}}
 
     //invincibility
     bool invincible;
@@ -133,30 +139,43 @@ public class PlayerController : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
             }
 
+            
             //parry
-            if (!canParry)
-            {
-                parryTimer += Time.deltaTime;
-                if (parryTimer > parryLockout)
-                {
-                    canParry = true;
-                    parryTimer = 0;
-                    control = true;
-                }
-            }
-
             if (Input.GetMouseButton(1) && canParry)
             {
                 canParry = false;
                 control = false;
+                parryActive = true;
+                ParryController.Instance.transform.localScale = new Vector3(1,1,1);
+                ParryController.Instance.GetComponent<SpriteRenderer>().color = Color.blue;
+                gameObject.GetComponent<ObjectInfo>().Radius = 0.6f;
             }
         }
+
+        //parry
+            if (!canParry)
+            {
+                parryTimer += Time.deltaTime;
+                if (parryTimer > parryActiveTime && parryTimer < parryLockout && parryActive) 
+                {
+                    parryActive = false;
+                    ParryController.Instance.GetComponent<SpriteRenderer>().color = Color.gray;
+                    gameObject.GetComponent<ObjectInfo>().Radius = 0.6f;
+                }
+                else if (parryTimer > parryLockout)
+                {
+                    canParry = true;
+                    parryTimer = 0;
+                    control = true;
+                    ParryController.Instance.transform.localScale = new Vector3(0,0,0);
+                }
+            }
 
         //deathlogic
         if (gameObject.GetComponent<ObjectInfo>().Health <=0)
         {
             control = false;
-            CollisionManager.Instance.GetComponent<GameOverScript>().GameOver();
+            CollisionManager.Instance.GetComponent<GameOverScript>().GameOver(false);
             Time.timeScale = 0;
         }
     }
